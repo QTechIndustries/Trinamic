@@ -45,7 +45,7 @@ class GCONF():
 		self.diag0_int_pushpull = False
 		self.diag1_poscomp_pushpull = False
 		self.small_hysteresis = False
-		self.STOP_ENABLE = False
+		self.stop_enable = False
 		self.direct_mode = False
 		self.test_mode = False
 
@@ -133,4 +133,85 @@ class FACTORY_CONF():
         #
         self.FCLKTRIM = None
 
+class CoolConf:
+	def __init__(self):
+		self.address = 0x6D
+		self.type = 'W'
+		self.bytes = bytearray(4)
+		#
+		self.semin = None
+		self.seup = None
+		self.semax = None
+		self.sedn = None
+		self.seimin = None # bool
+		self.sgt = None
+		self.sfilt = None # bool
 
+class DcCtrl:
+	def __init__(self):
+		self.address = 0x6E
+		self.type = 'W'
+		self.bytes = bytearray(3)
+		#
+		self.dc_time = None # 0-1023
+		self.sc_sg = None # 0-255
+
+class Drv_Status:
+	def __init__(self):
+		self.address = 0x6F
+		self.type = 'R'
+		self.bytes = bytearray(4)
+		#
+		self.sg_result = None # 0-1023
+		self.s2vsa = None # bool
+		self.s2vsb = None # bool
+		self.stealth = None # bool
+		self.fsactive = None # bool
+		self.csactual = None # 0-31
+		self.stallguard = None # bool
+		self.ot = None # bool
+		self.otpw = None # bool
+		self.s2ga = None # bool
+		self.s2gb = None # bool
+		self.ola = None # bool
+		self.olb = None # bool
+
+class PwmConf:
+	def __init__(self):
+		self.address = 0x70
+		self.type = 'W'
+		self.bytes = bytearray(4)
+		#
+		self.pwm_ofs = 0xE # 0-255
+		self.pwm_grad = 0x1 # 0-255
+		self.pwm_freq = 0x0 # 0-3
+		self.pwm_autoscale = False
+		self.pwm_autograd =False
+		self.freewheel =0x0 # 0-3
+		self.pwm_reg = 0x4 # 1-15
+		self.pwm_lim = 0xC # 0-15
+
+class Pwm_Scale:
+	def __init__(self):
+		self.address = 0x71
+		self.type = 'R'
+		self.bytes = bytearray(3)
+		#
+		self.pwm_scale_sum = None # 0-255
+		self.pwm_scale_auto = None # -255-255
+
+class Pwm_Auto:
+	def __init__(self):
+		self.address = 0x72
+		self.type = 'R'
+		self.bytes = bytes(1)
+		#
+		self.pwm_auto = None # 0-255
+
+class Lost_Steps:
+	def __init__(self):
+		self.address = 0x73
+		self.type = 'R'
+		self.bytes = bytearray(4)
+		#
+		self.lost_steps = None # 0-0xFFFFFFFF
